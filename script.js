@@ -22,18 +22,18 @@ function generateComplexEquation() {
     const b = Math.floor(Math.random() * 10) + 5;
     const c = Math.floor(Math.random() * 10) + 2;
     const d = Math.floor(Math.random() * 5) + 1;
-    
+
     // Create the equation: (a² + b) × c - d² = ?
     const result = (Math.pow(a, 2) + b) * c - Math.pow(d, 2);
     correctAnswer = result;
-    
+
     return `(${a}² + ${b}) × ${c} - ${d}² = ?`;
 }
 
 // Create floating hearts
 function createFloatingHearts() {
     const hearts = ['❤️', '💕', '💖', '💗', '💓', '💝', '💘'];
-    
+
     setInterval(() => {
         const heart = document.createElement('div');
         heart.classList.add('floating-heart');
@@ -42,9 +42,9 @@ function createFloatingHearts() {
         heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
         heart.style.animationDuration = (Math.random() * 5 + 8) + 's';
         heart.style.animationDelay = Math.random() * 2 + 's';
-        
+
         heartsContainer.appendChild(heart);
-        
+
         // Remove heart after animation
         setTimeout(() => {
             heart.remove();
@@ -55,7 +55,7 @@ function createFloatingHearts() {
 // Create sparkles for celebration
 function createSparkles() {
     const sparklesContainer = document.getElementById('sparkles');
-    
+
     for (let i = 0; i < 20; i++) {
         const sparkle = document.createElement('div');
         sparkle.classList.add('sparkle');
@@ -73,10 +73,10 @@ function createConfetti() {
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    
+
     const confetti = [];
     const colors = ['#ff6b9d', '#ff8a80', '#ffab91', '#ff4d7d', '#e91e63', '#f48fb1', '#fff', '#ffd700'];
-    
+
     // Create confetti particles
     for (let i = 0; i < 200; i++) {
         confetti.push({
@@ -91,16 +91,16 @@ function createConfetti() {
             shape: Math.random() > 0.5 ? 'circle' : 'rect'
         });
     }
-    
+
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
+
         confetti.forEach((particle, index) => {
             ctx.save();
             ctx.translate(particle.x, particle.y);
             ctx.rotate(particle.rotation * Math.PI / 180);
             ctx.fillStyle = particle.color;
-            
+
             if (particle.shape === 'circle') {
                 ctx.beginPath();
                 ctx.arc(0, 0, particle.size / 2, 0, Math.PI * 2);
@@ -108,26 +108,26 @@ function createConfetti() {
             } else {
                 ctx.fillRect(-particle.size / 2, -particle.size / 4, particle.size, particle.size / 2);
             }
-            
+
             ctx.restore();
-            
+
             // Update position
             particle.x += particle.speedX;
             particle.y += particle.speedY;
             particle.rotation += particle.rotationSpeed;
-            
+
             // Reset if off screen
             if (particle.y > canvas.height + 20) {
                 particle.y = -20;
                 particle.x = Math.random() * canvas.width;
             }
         });
-        
+
         requestAnimationFrame(animate);
     }
-    
+
     animate();
-    
+
     // Handle resize
     window.addEventListener('resize', () => {
         canvas.width = window.innerWidth;
@@ -141,7 +141,7 @@ function showCelebration() {
     celebrationContainer.classList.add('show');
     createSparkles();
     createConfetti();
-    
+
     // Add more floating hearts for celebration
     const celebrationHearts = ['❤️', '💕', '💖', '💗', '💓', '💝', '💘', '🌹', '✨'];
     for (let i = 0; i < 30; i++) {
@@ -172,7 +172,7 @@ btnNo.addEventListener('click', () => {
     setTimeout(() => {
         btnNo.classList.remove('shake');
     }, 500);
-    
+
     if (noClickCount === 1) {
         warningMessage.textContent = 'Czy na pewno??? 🥺';
         warningMessage.classList.add('show');
@@ -191,25 +191,29 @@ btnNo.addEventListener('click', () => {
 // Handle equation submit
 btnSubmit.addEventListener('click', () => {
     const userAnswer = parseInt(equationInput.value);
-    
+
     if (isNaN(userAnswer)) {
         equationError.textContent = 'Wpisz poprawną liczbę! 🤔';
         return;
     }
-    
+
     if (userAnswer === correctAnswer) {
-        // If they somehow get it right, generate a new harder equation
-        equationError.textContent = 'Brawo... ale spróbuj jeszcze raz z nowym! 😏';
-        equationDisplay.textContent = generateComplexEquation();
-        equationInput.value = '';
-        
-        // Make the Yes button more attractive
-        btnYes.style.transform = 'scale(1.2)';
-        btnYes.style.boxShadow = '0 0 50px rgba(255, 107, 157, 0.8)';
+        // Even if correct - there's no such option as "No"!
+        equationContainer.innerHTML = `
+            <div class="no-option-message">
+                <p class="big-message">NIE MA TAKIEJ OPCJI! 😏💕</p>
+                <p class="instruction-message">14 Lutego o godzinie 18:00<br>masz być pięknie ubrana i gotowa! 👗✨</p>
+            </div>
+        `;
+
+        // After 3 seconds, show celebration
+        setTimeout(() => {
+            showCelebration();
+        }, 4000);
     } else {
         equationError.textContent = 'Źle! Może lepiej kliknij TAK? 💕';
         equationInput.value = '';
-        
+
         // Pulse the Yes button
         btnYes.style.animation = 'pulse 0.5s ease-in-out 3';
     }
