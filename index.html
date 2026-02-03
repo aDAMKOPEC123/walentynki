@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dla Wiktorii ❤️</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Floating hearts background -->
+    <div class="hearts-container" id="hearts-container"></div>
+    
+    <!-- Main question section -->
+    <div class="container" id="question-container">
+        <div class="card">
+            <h1 class="title">Wiktorio</h1>
+            <div class="heart-divider">
+                <span class="heart">💕</span>
+            </div>
+            <h2 class="question">Czy zostaniesz moją Walentynką???</h2>
+            
+            <div class="buttons">
+                <button class="btn btn-yes" id="btn-yes">
+                    <span class="btn-text">Tak</span>
+                    <span class="btn-heart">❤️</span>
+                </button>
+                <button class="btn btn-no" id="btn-no">
+                    <span class="btn-text">Nie</span>
+                </button>
+            </div>
+            
+            <!-- Warning messages -->
+            <div class="warning-message" id="warning-message"></div>
+            
+            <!-- Math equation challenge -->
+            <div class="equation-container" id="equation-container">
+                <p class="equation-intro">Aby kliknąć "Nie", rozwiąż to równanie:</p>
+                <p class="equation" id="equation"></p>
+                <input type="text" class="equation-input" id="equation-input" placeholder="Twoja odpowiedź...">
+                <button class="btn btn-submit" id="btn-submit">Sprawdź</button>
+                <p class="equation-error" id="equation-error"></p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Success celebration section -->
+    <div class="celebration-container" id="celebration-container">
+        <div class="celebration-content">
+            <div class="big-heart" id="big-heart">❤️</div>
+            <h1 class="love-text" id="love-text">Kocham Cię!</h1>
+            <div class="sparkles" id="sparkles"></div>
+            <div class="info-box" id="info-box">
+                <p class="date-text">Widzimy się 14 Lutego</p>
+                <p class="more-info">Więcej informacji wkrótce... 💝</p>
+            </div>
+        </div>
+        <canvas id="confetti-canvas"></canvas>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
